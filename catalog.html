@@ -1,0 +1,542 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Каталог проектов — Добро рядом</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- Шапка сайта -->
+<header class="header">
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="bi bi-heart-fill"></i> Добро рядом
+            </a>
+
+            <button class="navbar-toggler" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#navbarMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarMenu">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Главная</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link active" href="catalog.html">Проекты</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">О нас</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="contacts.html">Контакты</a>
+                    </li>
+                </ul>
+
+                <a href="catalog.html" class="btn btn-primary ms-lg-3">
+                    Стать волонтёром
+                </a>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<main>
+
+    <!-- Заголовок страницы -->
+    <section class="page-banner">
+        <div class="container">
+            <div class="breadcrumbs">
+                <a href="index.html">Главная</a>
+                <span>/</span>
+                <span>Каталог проектов</span>
+            </div>
+
+            <h1>Найди свой проект</h1>
+            <p>Каждое доброе дело начинается с маленького шага.</p>
+        </div>
+    </section>
+
+    <!-- Каталог и фильтры -->
+    <section class="section">
+        <div class="container">
+            <div class="row g-4">
+
+                <!-- Фильтры -->
+                <aside class="col-lg-3">
+                    <div class="filter-panel">
+                        <h3>Фильтры</h3>
+
+                        <div class="filter-group">
+                            <label for="directionFilter">Направление</label>
+                            <select id="directionFilter" class="form-select">
+                                <option value="">Все направления</option>
+                                <option value="Экология">Экология</option>
+                                <option value="Социальное">Социальное</option>
+                                <option value="Культура">Культура</option>
+                                <option value="Образование">Образование</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-group">
+                            <label for="cityFilter">Город</label>
+                            <select id="cityFilter" class="form-select">
+                                <option value="">Все города</option>
+                                <option value="Москва">Москва</option>
+                                <option value="Волгоград">Волгоград</option>
+                                <option value="Казань">Казань</option>
+                                <option value="Санкт-Петербург">Санкт-Петербург</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-group">
+                            <label for="formatFilter">Формат участия</label>
+                            <select id="formatFilter" class="form-select">
+                                <option value="">Любой формат</option>
+                                <option value="Очно">Очно</option>
+                                <option value="Онлайн">Онлайн</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-group">
+                            <label for="dateFilter">Дата проведения</label>
+                            <input type="date" id="dateFilter" class="form-control">
+                        </div>
+
+                        <button class="btn btn-primary w-100 mt-3" id="applyFilters">
+                            Применить
+                        </button>
+
+                        <button class="btn btn-outline-secondary w-100 mt-2" id="resetFilters">
+                            Сбросить
+                        </button>
+                    </div>
+                </aside>
+
+                <!-- Список проектов -->
+                <div class="col-lg-9">
+
+                    <!-- Поиск и сортировка -->
+                    <div class="catalog-tools">
+
+                        <div class="catalog-search">
+                            <i class="bi bi-search"></i>
+
+                            <input
+                                type="text"
+                                id="projectSearch"
+                                class="form-control"
+                                placeholder="Поиск проектов по названию или описанию..."
+                                aria-label="Поиск проектов"
+                            >
+
+                            <button
+                                id="clearSearch"
+                                type="button"
+                                aria-label="Очистить поиск"
+                            >
+                                <i class="bi bi-x-lg"></i>
+                            </button>
+                        </div>
+
+                        <div class="catalog-sort">
+                            <label for="sortProjects">Сортировка:</label>
+
+                            <select id="sortProjects" class="form-select">
+                                <option value="newest">Сначала новые</option>
+                                <option value="oldest">Сначала старые</option>
+                                <option value="popular">Сначала популярные</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                    <div class="catalog-top">
+                        <h2>Доступные проекты</h2>
+                        <span id="projectCount">Найдено проектов: 6</span>
+                    </div>
+
+                    <div class="row g-4" id="projectsContainer">
+
+                        <!-- Проект 1 -->
+                        <div class="col-md-6 project-item"
+                             data-direction="Экология"
+                             data-city="Москва"
+                             data-format="Очно"
+                             data-date="2026-11-20"
+                             data-id="1"
+                             data-popularity="95">
+
+                            <div class="project-card">
+                                <img src="https://images.unsplash.com/photo-1472396961693-142e6e269027?w=800" alt="Экология">
+
+                                <div class="project-card__body">
+                                    <span class="project-tag">Экология</span>
+                                    <span class="project-badge">Срочно нужны волонтёры</span>
+
+                                    <h3>Чистый лес</h3>
+                                    <p>Организатор: ЭкоМир</p>
+                                    <p><i class="bi bi-calendar"></i> 20 ноября 2026</p>
+                                    <p><i class="bi bi-geo-alt"></i> Москва</p>
+                                    <p><i class="bi bi-people"></i> Очно</p>
+
+                                    <div class="project-actions">
+                                        <button class="btn btn-outline-primary details-btn"
+                                                data-id="1">
+                                            Быстрый просмотр
+                                        </button>
+
+                                        <a href="project.html?id=1" class="btn btn-primary">
+                                            Подробнее
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Проект 2 -->
+                        <div class="col-md-6 project-item"
+                             data-direction="Социальное"
+                             data-city="Волгоград"
+                             data-format="Очно"
+                             data-date="2026-11-25"
+                             data-id="2"
+                             data-popularity="120">
+
+                            <div class="project-card">
+                                <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=800" alt="Помощь людям">
+
+                                <div class="project-card__body">
+                                    <span class="project-tag">Социальное</span>
+                                    <span class="project-badge">Можно без опыта</span>
+
+                                    <h3>Тёплые сердца</h3>
+                                    <p>Организатор: Помощь рядом</p>
+                                    <p><i class="bi bi-calendar"></i> 25 ноября 2026</p>
+                                    <p><i class="bi bi-geo-alt"></i> Волгоград</p>
+                                    <p><i class="bi bi-people"></i> Очно</p>
+
+                                    <div class="project-actions">
+                                        <button class="btn btn-outline-primary details-btn" data-id="2">
+                                            Быстрый просмотр
+                                        </button>
+
+                                        <a href="project.html?id=2" class="btn btn-primary">
+                                            Подробнее
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Проект 3 -->
+                        <div class="col-md-6 project-item"
+                             data-direction="Образование"
+                             data-city="Москва"
+                             data-format="Онлайн"
+                             data-date="2026-12-01"
+                             data-id="3"
+                             data-popularity="85">
+
+                            <div class="project-card">
+                                <img src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=800" alt="Образование">
+
+                                <div class="project-card__body">
+                                    <span class="project-tag">Образование</span>
+                                    <span class="project-badge">Онлайн</span>
+
+                                    <h3>Учимся вместе</h3>
+                                    <p>Организатор: Образование каждому</p>
+                                    <p><i class="bi bi-calendar"></i> 1 декабря 2026</p>
+                                    <p><i class="bi bi-geo-alt"></i> Москва</p>
+                                    <p><i class="bi bi-laptop"></i> Онлайн</p>
+
+                                    <div class="project-actions">
+                                        <button class="btn btn-outline-primary details-btn" data-id="3">
+                                            Быстрый просмотр
+                                        </button>
+
+                                        <a href="project.html?id=3" class="btn btn-primary">
+                                            Подробнее
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Проект 4 -->
+                        <div class="col-md-6 project-item"
+                             data-direction="Культура"
+                             data-city="Санкт-Петербург"
+                             data-format="Очно"
+                             data-date="2026-12-05"
+                             data-id="4"
+                             data-popularity="60">
+
+                            <div class="project-card">
+                                <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800" alt="Культурное мероприятие">
+
+                                <div class="project-card__body">
+                                    <span class="project-tag">Культура</span>
+
+                                    <h3>Фестиваль искусств</h3>
+                                    <p>Организатор: Культурный центр</p>
+                                    <p><i class="bi bi-calendar"></i> 5 декабря 2026</p>
+                                    <p><i class="bi bi-geo-alt"></i> Санкт-Петербург</p>
+                                    <p><i class="bi bi-people"></i> Очно</p>
+
+                                    <div class="project-actions">
+                                        <button class="btn btn-outline-primary details-btn" data-id="4">
+                                            Быстрый просмотр
+                                        </button>
+
+                                        <a href="project.html?id=4" class="btn btn-primary">
+                                            Подробнее
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Проект 5 -->
+                        <div class="col-md-6 project-item"
+                             data-direction="Экология"
+                             data-city="Казань"
+                             data-format="Очно"
+                             data-date="2026-12-10"
+                             data-id="5"
+                             data-popularity="110">
+
+                            <div class="project-card">
+                                <img src="https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=800" alt="Экологический проект">
+
+                                <div class="project-card__body">
+                                    <span class="project-tag">Экология</span>
+                                    <span class="project-badge">Можно без опыта</span>
+
+                                    <h3>Зелёный город</h3>
+                                    <p>Организатор: ЭкоКазань</p>
+                                    <p><i class="bi bi-calendar"></i> 10 декабря 2026</p>
+                                    <p><i class="bi bi-geo-alt"></i> Казань</p>
+                                    <p><i class="bi bi-people"></i> Очно</p>
+
+                                    <div class="project-actions">
+                                        <button class="btn btn-outline-primary details-btn" data-id="5">
+                                            Быстрый просмотр
+                                        </button>
+
+                                        <a href="project.html?id=5" class="btn btn-primary">
+                                            Подробнее
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Проект 6 -->
+                        <div class="col-md-6 project-item"
+                             data-direction="Социальное"
+                             data-city="Москва"
+                             data-format="Онлайн"
+                             data-date="2026-12-15"
+                             data-id="6"
+                             data-popularity="75">
+
+                            <div class="project-card">
+                                <img src="https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?w=800" alt="Благотворительность">
+
+                                <div class="project-card__body">
+                                    <span class="project-tag">Социальное</span>
+                                    <span class="project-badge">Онлайн</span>
+
+                                    <h3>Поддержка каждому</h3>
+                                    <p>Организатор: Добрые дела</p>
+                                    <p><i class="bi bi-calendar"></i> 15 декабря 2026</p>
+                                    <p><i class="bi bi-geo-alt"></i> Москва</p>
+                                    <p><i class="bi bi-laptop"></i> Онлайн</p>
+
+                                    <div class="project-actions">
+                                        <button class="btn btn-outline-primary details-btn" data-id="6">
+                                            Быстрый просмотр
+                                        </button>
+
+                                        <a href="project.html?id=6" class="btn btn-primary">
+                                            Подробнее
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <p id="emptyMessage" class="text-center mt-5" hidden>
+                        По заданным параметрам проектов не найдено.
+                    </p>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+
+<!-- Модальное окно быстрого просмотра -->
+<div class="modal fade" id="projectModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitle">Название проекта</h5>
+
+                <button type="button" class="btn-close"
+                        data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body">
+                <img id="modalImage" src="" alt="" class="modal-project-image">
+                <p id="modalDescription" class="mt-3"></p>
+                <p id="modalInfo"></p>
+            </div>
+
+            <div class="modal-footer">
+                <a href="#" id="modalLink" class="btn btn-primary">
+                    Перейти к проекту
+                </a>
+
+                <button type="button" class="btn btn-secondary"
+                        data-bs-dismiss="modal">
+                    Закрыть
+                </button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<!-- Подвал сайта -->
+<footer class="footer">
+    <div class="container">
+        <div class="row g-4">
+
+            <!-- О проекте -->
+            <div class="col-md-4">
+                <h3>
+                    <i class="bi bi-heart-fill"></i> Добро рядом
+                </h3>
+                <p>Объединяем людей ради добрых дел.</p>
+            </div>
+
+            <!-- Навигация -->
+            <div class="col-md-3">
+                <h5>Навигация</h5>
+                <a href="index.html">Главная</a>
+                <a href="catalog.html">Проекты</a>
+                <a href="about.html">О нас</a>
+                <a href="events.html">Мероприятия</a>
+            </div>
+
+            <!-- Контакты -->
+            <div class="col-md-5">
+                <h5>Контакты</h5>
+
+                <!-- Адрес -->
+                <div class="footer__contact-item">
+                    <i class="bi bi-geo-alt-fill"></i>
+                    <span>г. Москва, ул. Волонтёрская, д. 12</span>
+                </div>
+
+                <!-- Телефон -->
+                <div class="footer__contact-item">
+                    <i class="bi bi-telephone-fill"></i>
+                    <a href="tel:+78005553535">+7 (800) 555-35-35</a>
+                </div>
+
+                <!-- Время звонков -->
+                <div class="footer__contact-item">
+                    <i class="bi bi-clock-fill"></i>
+                    <small>Звонки с 9:00 до 18:00 по МСК</small>
+                </div>
+
+                <!-- Электронная почта -->
+                <div class="footer__contact-item">
+                    <i class="bi bi-envelope-fill"></i>
+                    <a href="mailto:hello@dobroryadom.ru">
+                        hello@dobroryadom.ru
+                    </a>
+                </div>
+
+                <!-- Социальные сети -->
+                <div class="social-links mt-3">
+                    <a href="#" aria-label="Telegram">
+                        <i class="bi bi-telegram"></i>
+                    </a>
+
+                    <a href="#" aria-label="ВКонтакте" class="social-link-vk">
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                             viewBox="0 0 24 24"
+                             width="24"
+                             height="24"
+                             fill="currentColor"
+                             aria-hidden="true">
+                            <path d="M3.5 7.5h3.2c.2 3.1 1.5 4.4 2.5 4.7V7.5h3v2.7c1-.1 2.1-1.3 2.5-2.7h3c-.3 1.7-1.6 3-2.5 3.7 1 .6 2.5 1.8 3.1 4h-3.3c-.5-1.5-1.6-2.6-2.8-2.7v2.7h-.4c-4.2 0-6.6-2.9-6.7-7.7z"/>
+                        </svg>
+                    </a>
+
+                    <a href="#" aria-label="Instagram">
+                        <i class="bi bi-instagram"></i>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+        <hr>
+
+        <p class="footer__bottom">
+            © 2026 Добро рядом. Все права защищены.
+        </p>
+    </div>
+</footer>
+
+
+<!-- Кнопка возврата наверх -->
+<button class="back-to-top" id="backToTop" aria-label="Вернуться наверх">
+    <svg xmlns="http://www.w3.org/2000/svg"
+         width="30"
+         height="30"
+         viewBox="0 0 24 24"
+         fill="none"
+         stroke="white"
+         stroke-width="1.8"
+         stroke-linecap="round"
+         stroke-linejoin="round">
+
+        <path d="M12 13.5s-5-2.8-5-6a3 3 0 0 1 5-2.2A3 3 0 0 1 17 7.5c0 3.2-5 6-5 6z"/>
+        <path d="M3 14.5l3.5-2 3 1.5h5l3-1.5 3.5 2-5 5H8z"/>
+        <path d="M3 14.5l-1 2 5 4 2-1.5"/>
+        <path d="M21 14.5l1 2-5 4-2-1.5"/>
+
+    </svg>
+</button>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/main.js"></script>
+<script src="js/catalog.js"></script>
+
+</body>
+</html>
